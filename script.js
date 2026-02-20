@@ -1,6 +1,11 @@
 let array = [];
 const container = document.getElementById("array-container");
+let speed = 50;
+const speedRange = document.getElementById("speedRange");
 
+speedRange.addEventListener("input", function() {
+    speed = 210 - this.value;
+});
 function generateArray() {
     array = [];
     container.innerHTML = "";
@@ -28,8 +33,7 @@ async function bubbleSort() {
             bars[j].style.backgroundColor = "red";
             bars[j + 1].style.backgroundColor = "red";
 
-            await sleep(50);
-
+            await sleep(speed);
             if (array[j] > array[j + 1]) {
                 let temp = array[j];
                 array[j] = array[j + 1];
@@ -54,7 +58,7 @@ async function selectionSort() {
 
         for (let j = i + 1; j < array.length; j++) {
             bars[j].style.backgroundColor = "red";
-            await sleep(50);
+            await sleep(speed);
 
             if (array[j] < array[minIndex]) {
                 minIndex = j;
@@ -72,6 +76,31 @@ async function selectionSort() {
 
         bars[i].style.backgroundColor = "#3498db";
     }
+}
+async function insertionSort() {
+    let bars = document.getElementsByClassName("bar");
+
+    for (let i = 1; i < array.length; i++) {
+        let key = array[i];
+        let j = i - 1;
+
+        while (j >= 0 && array[j] > key) {
+            array[j + 1] = array[j];
+            bars[j + 1].style.height = array[j] + "px";
+
+            bars[j].style.backgroundColor = "red";
+            await sleep(speed);
+            bars[j].style.backgroundColor = "#3498db";
+
+            j--;
+        }
+
+        array[j + 1] = key;
+        bars[j + 1].style.height = key + "px";
+    }
+}
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
 }
 
 generateArray();

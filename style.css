@@ -29,3 +29,15 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
+.dark {
+    background-color: #121212;
+    color: white;
+}
+
+.dark #array-container {
+    border: 1px solid white;
+}
+
+.dark .bar {
+    background-color: #9b59b6;
+}
